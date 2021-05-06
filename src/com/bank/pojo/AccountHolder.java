@@ -4,23 +4,21 @@ public class AccountHolder {
     private String firstName;
     private String lastName;
     private int personalId;
-    private int accountId;
     private String passWord;
 
     public AccountHolder(String firstName, String lastName, int personalId, int accountId, String passWord) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.personalId = personalId;
-        this.accountId = accountId;
         this.passWord = passWord;
     }
 
-    public int getAccountId() {
-        return accountId;
-    }
+    public AccountHolder(){
+        this.firstName = null;
+        this.lastName = null;
+        this.personalId = 0;
+        this.passWord = null;
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
     }
 
     public String getFirstName() {
