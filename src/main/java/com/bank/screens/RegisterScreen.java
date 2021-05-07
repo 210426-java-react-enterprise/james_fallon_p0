@@ -12,21 +12,22 @@ public class RegisterScreen extends Screen{
 
     @Override
     public void render() {
+        System.out.println ("");
         try(Scanner keyboard = new Scanner(System.in))  {
 
         AccountHolder newAccountHolder = new AccountHolder();
 
         System.out.println("You made a good choice!");
         System.out.println("-----------------------");
-        System.out.println("First Name: ");
-        newAccountHolder.setFirstName(keyboard.nextLine());
-        System.out.println("Last Name: ");
-        newAccountHolder.setLastName(keyboard.nextLine());
-        System.out.println ("Set Password: ");
-        newAccountHolder.setPassWord(keyboard.nextLine());
+        System.out.print("First Name: ");
+        newAccountHolder.setFirstName(keyboard.next());
+        System.out.print("Last Name: ");
+        newAccountHolder.setLastName(keyboard.next());
+        System.out.print("Set Password: ");
+        newAccountHolder.setPassWord(keyboard.next());
 
-        } catch (Exception NoSuchElement){
-            
+        } catch (Exception e){
+            e.printStackTrace ();
         }
 
     }
