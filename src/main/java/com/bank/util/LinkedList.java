@@ -60,7 +60,8 @@ public class LinkedList<T> implements List<T>, Queue<T>{
             }
 
         }
-        return null;
+        return data;
+
     }
 
     @Override

@@ -1,53 +1,46 @@
 package com.bank.screens;
 
+import com.bank.util.ScreenRouter;
+import static com.bank.Driver.app;
 import java.io.BufferedReader;
 
 public class WelcomeScreen extends Screen{
+    private BufferedReader consoleReaader;
+    private ScreenRouter router;
 
-    private BufferedReader consoleReader;
-    //private ScreenRouter router;
-
-    public WelcomeScreen(String name, String route) {
+    public WelcomeScreen(BufferedReader consoleReader, ScreenRouter router){
         super("WelcomeScreen", "/welcome");
-        this.consoleReader = consoleReader;
-        //this.router = router;
+        this.consoleReaader = consoleReader;
+        this.router = router;
     }
 
     @Override
     public void render() {
-        System.out.println("Welcome to JFBanking!");
-        System.out.println("****************");
-        System.out.println("Press (1) to log in or press (2) to create your account today!!!!");
-        System.out.println("**********");
-        System.out.println("**********");
-        System.out.println("Press (3) to exit");
-
-        try {
-            System.out.print("> ");
-            String userSelection = consoleReader.readLine();
-
-            switch (userSelection) {
+        System.out.println ("THANK YOU FOR CHOOSING JF BANKING!");
+        System.out.println ("PRESS (1) TO LOGIN.");
+        System.out.println ("PRESS (2) TO CREATE YOUR ACCOUNT TODAY!!!");
+        System.out.println ("PRESS (3) TO EXIT.");
+        System.out.print(">>>>>>> ");
+        try{
+            String userSelection = consoleReaader.readLine();
+            switch(userSelection){
                 case "1":
-                    System.out.println("Navigating to login screen");
-                    //router.navigate("/login");
+                    System.out.println("Taking you to your Account Dash Board");
+                    ///route to login screen
                     break;
                 case "2":
-                    System.out.println("Lets Get Started!");
-                    //router.navigate("/register");
+                    System.out.println ("Taking you to register screen");
+                    //route to register screen
                     break;
                 case "3":
-                    System.out.println("Exiting application!");
-                    // we need to figure out how to tell the app the shutdown
-//                    System.exit(0); // very bad practice; force closes the JVM
+                    System.out.println ("Exiting application!");
+                    app().setAppRunning(false);
 
-                    break;
-                default:
-                    System.out.println("Invalid selection!");
             }
-
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
         }
+
 
     }
 }

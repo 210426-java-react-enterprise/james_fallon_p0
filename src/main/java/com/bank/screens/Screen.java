@@ -9,13 +9,13 @@ public abstract class Screen {
         this.route = route;
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
-
-    public String getRoute() {
+    public String getRoute(){
         return route;
     }
 
     public abstract void render();
+
 }
