@@ -9,8 +9,7 @@ public class AccountHolder {
     private String passWord;
 
 
-    public AccountHolder(int id, String firstName, String lastName, int age, String email, String password) {
-        this.id = id;
+    public AccountHolder(String firstName, String lastName, int age, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

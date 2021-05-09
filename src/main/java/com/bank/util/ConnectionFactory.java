@@ -15,7 +15,7 @@ public class ConnectionFactory {
 
     static{
         try{
-            Class.forName("org.postgres.Driver");
+            Class.forName("org.postgresql.Driver");
         }catch(ClassNotFoundException e){
             e.printStackTrace ();
         }
@@ -24,7 +24,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){
         try{
-            props.load(new FileReader("src/main/resources/application.BankDataBase.properties"));
+            props.load(new FileReader("src/main/resources/BankDataBase.properties"));
         }catch (IOException e){
             e.printStackTrace ();
         }

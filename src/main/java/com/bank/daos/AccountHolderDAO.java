@@ -16,8 +16,8 @@ public class AccountHolderDAO {
             pstmt.setString(1, newAccountHolder.getFirstName ());
             pstmt.setString(2, newAccountHolder.getLastName ());
             pstmt.setInt(3, newAccountHolder.getAge ());
-            pstmt.setString(3, newAccountHolder.getEmail ());
-            pstmt.setString(3, newAccountHolder.getPassword ());
+            pstmt.setString(4, newAccountHolder.getEmail ());
+            pstmt.setString(5, newAccountHolder.getPassword ());
             int rowsInserted = pstmt.executeUpdate ();
 
             if(rowsInserted != 0){
@@ -31,6 +31,7 @@ public class AccountHolderDAO {
         }
 
     }
+
 
 
 

@@ -13,12 +13,19 @@ public class AccountHolderService {
 
     public void register(AccountHolder newAccountHolder) throws InvalidRequestException, ResourcePersistenceException {
 
-       // if(!isUserValid(newAccountHolder))
+       if(!isAccountHolderValid(newAccountHolder)){
+           throw new InvalidRequestException ("Invalid user data");
+       }
+
+       accountHolderDAO.save(newAccountHolder);
     }
 
-    public boolean isUserValid(AccountHolder accountHolder){
+    public boolean isAccountHolderValid(AccountHolder accountHolder){
         if(accountHolder == null) return false;
-        if(accountHolder.get)
+        if(accountHolder.getFirstName() == null || accountHolder.getFirstName().trim().isEmpty()) return false;
+        if(accountHolder.getLastName() == null || accountHolder.getLastName().trim().isEmpty()) return false;
+        if(accountHolder.getEmail () == null || accountHolder.getEmail ().trim().isEmpty()) return false;
+        if(accountHolder.getAge () <=0) return false;
         return true;
     }
 }
