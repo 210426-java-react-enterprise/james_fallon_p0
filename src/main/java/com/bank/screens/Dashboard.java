@@ -21,7 +21,7 @@ public class Dashboard extends Screen{
         System.out.println ("Welcome to your account DashBoard " + profile.getCurrentUser () + "!");
         System.out.println ("Your User ID: " + profile.getCurrentUser ());
         System.out.println ("Your Accounts: " /* need to work on this */);
-        
+
 
 
 

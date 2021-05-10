@@ -3,6 +3,8 @@ package com.bank.daos;
 import com.bank.pojo.Account;
 import com.bank.pojo.User;
 import com.bank.util.ConnectionFactory;
+import com.bank.util.LinkedList;
+import com.bank.util.List;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,5 +34,32 @@ public class AccountDAO {
         }catch (SQLException throwables){
             throwables.printStackTrace ();
         }
+    }
+
+    public List<Account> getAllAccountsByUserID(User registeredUser){
+        List<Account> accounts = new LinkedList<> ();
+        try(Connection conn = ConnectionFactory.getInstance ().getConnection ()){
+            String sql = "select * from bank.accounts join accounts_users on accounts.account_id = accounts_users.account_id where user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Account account = new Account();
+
+                account.setAccountId (rs.getInt("account_id"));
+                account.setAccountType (rs.getString("account_type"));
+                account.setAccountBalance(rs.getDouble("balance"));
+
+
+
+                accounts.add(account);
+            }
+
+
+
+        }catch (SQLException throwables){
+            throwables.printStackTrace ();
+        }
+        return accounts;
     }
 }
