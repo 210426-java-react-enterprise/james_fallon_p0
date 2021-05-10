@@ -30,7 +30,7 @@ public class AppState {
         router.addScreen (new RegisterAccountScreen (consoleReader, userService, router, profile));
         router.addScreen(new OpenAccountScreen (consoleReader, router, profile, accountDAO));
         router.addScreen (new DepositScreen (consoleReader, router, profile, accountDAO));
-        router.addScreen (new LoginScreen (consoleReader, router));
+        router.addScreen (new LoginScreen (consoleReader, router, profile));
 
         System.out.println ("Banking application opened!");
 

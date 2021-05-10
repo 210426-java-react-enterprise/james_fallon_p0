@@ -40,7 +40,8 @@ public class DepositScreen extends Screen{
 
         try {
             deposit = Double.parseDouble (consoleReader.readLine ());
-
+            //need to finish this.
+            router.navigate ("/dashboard");
 
         }catch (NumberFormatException e){
             System.err.println("You provided incorrect input for your deposit!");

@@ -3,6 +3,7 @@ package com.bank.screens;
 import com.bank.daos.UserDAO;
 import com.bank.pojo.User;
 import com.bank.services.UserService;
+import com.bank.util.Profile;
 import com.bank.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -12,12 +13,13 @@ public class LoginScreen extends Screen{
     private BufferedReader consoleReader;
     private ScreenRouter router;
     private UserDAO userDao = new UserDAO();
+    private Profile profile;
 
-    public LoginScreen(BufferedReader consoleReader, ScreenRouter router) {
+    public LoginScreen(BufferedReader consoleReader, ScreenRouter router, Profile profile) {
         super ("LoginScreen", "/login");
         this.consoleReader = consoleReader;
         this.router = router;
-
+        this.profile = profile;
     }
 
     @Override
@@ -36,6 +38,7 @@ public class LoginScreen extends Screen{
                 User authenticatedUser = userDao.findUserByEmailAndPassword(email, password);
                 if (authenticatedUser != null) {
                     System.out.println("Login successful!");
+                    profile.setCurrentUser (authenticatedUser);
                     router.navigate("/dashboard");
 
                 } else {
