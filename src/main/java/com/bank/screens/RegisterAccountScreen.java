@@ -2,20 +2,26 @@ package com.bank.screens;
 
 import com.bank.exceptions.InvalidRequestException;
 import com.bank.exceptions.ResourcePersistenceException;
-import com.bank.pojo.AccountHolder;
-import com.bank.services.AccountHolderService;
+import com.bank.pojo.User;
+import com.bank.services.UserService;
+import com.bank.util.Profile;
+import com.bank.util.ScreenRouter;
 
 import java.io.BufferedReader;
-import java.sql.SQLOutput;
+
+import static com.bank.Driver.app;
 
 public class RegisterAccountScreen extends Screen {
 
-    private AccountHolderService accountHolderService;
+    private UserService userService;
     private BufferedReader consoleReader;
-    public RegisterAccountScreen(BufferedReader consoleReader, AccountHolderService accountHolderService) {
+    private ScreenRouter router;
+    private Profile profile;
+    public RegisterAccountScreen(BufferedReader consoleReader, UserService userService, ScreenRouter router, Profile profile) {
         super ("RegisterAccount", "/register");
         this.consoleReader = consoleReader;
-        this.accountHolderService = accountHolderService;
+        this.userService = userService;
+        this.router = router;
     }
 
     @Override
@@ -25,6 +31,8 @@ public class RegisterAccountScreen extends Screen {
         String email;
         String password;
         int age;
+        String accountType = null;
+        Double accountBalance = 0.00;
 
         System.out.println ("CREATE YOUR ACCOUNT!");
         System.out.println ("+==================+");
@@ -41,8 +49,12 @@ public class RegisterAccountScreen extends Screen {
             System.out.print("Create Password:>>");
             password = consoleReader.readLine ();
 
-            AccountHolder newAccountHolder = new AccountHolder (firstName, lastName, age, email, password);
-            accountHolderService.register (newAccountHolder);
+            User newUser = new User (firstName, lastName, age, email, password);
+            userService.register (newUser);
+            app().setProfile ();
+            router.navigate ("/open");
+
+
 
         }catch(NumberFormatException nfe){
             System.err.println("You provided incorrect input for your age!");

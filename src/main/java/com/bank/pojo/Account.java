@@ -5,8 +5,7 @@ public class Account {
     private String accountType;
     private double accountBalance;
 
-    public Account(int accountId, String accountType, double accountBalance) {
-        this.accountId = accountId;
+    public Account(String accountType, double accountBalance) {
         this.accountType = accountType;
         this.accountBalance = accountBalance;
     }
@@ -34,4 +33,6 @@ public class Account {
     public void setAccountBalance(double accountBalance) {
         this.accountBalance = accountBalance;
     }
+
+
 }

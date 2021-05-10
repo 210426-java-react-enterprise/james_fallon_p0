@@ -1,26 +1,34 @@
 package com.bank.screens;
 
+import com.bank.pojo.User;
+import com.bank.util.Profile;
 import com.bank.util.ScreenRouter;
-import static com.bank.Driver.app;
+
 import java.io.BufferedReader;
 
-public class WelcomeScreen extends Screen{
+import static com.bank.Driver.app;
+
+public class OpenAccountScreen extends Screen{
+
     private BufferedReader consoleReader;
     private ScreenRouter router;
+    private Profile profile;
 
-    public WelcomeScreen(BufferedReader consoleReader, ScreenRouter router){
-        super("WelcomeScreen", "/welcome");
+    public OpenAccountScreen(BufferedReader consoleReader, ScreenRouter router, Profile profile) {
+        super ("OpenAccountScreen", "/open");
         this.consoleReader = consoleReader;
         this.router = router;
+        this.profile = app().getProfile;
+        User currentUser = profile.getCurrentUser ();
+
     }
 
     @Override
     public void render() {
-        System.out.println ("THANK YOU FOR CHOOSING JF BANKING!");
-        System.out.println ("PRESS (1) TO LOGIN.");
-        System.out.println ("PRESS (2) TO CREATE YOUR ACCOUNT TODAY!!!");
-        System.out.println ("PRESS (3) TO EXIT.");
-        System.out.print(">>>>>>> ");
+        System.out.println ("Hello " + "What kind of account would you like to Open?");
+        System.out.println ("Checking>>1");
+        System.out.println ("Savings>>2");
+
         try{
             String userSelection = consoleReader.readLine();
             switch(userSelection){
@@ -32,19 +40,12 @@ public class WelcomeScreen extends Screen{
                     System.out.println ("Taking you to register screen");
                     router.navigate ("/register");
                     break;
-                case "3":
-                    System.out.println ("Exiting application!");
-                    app().setAppRunning(false);
-                    break;
                 default:
-                    System.out.println ("Invalid Selection");
-
-
+                    System.out.println ("Invalid selection");
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-
 
     }
 }

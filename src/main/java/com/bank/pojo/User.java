@@ -1,6 +1,6 @@
 package com.bank.pojo;
 
-public class AccountHolder {
+public class User {
     private int id;
     private String firstName;
     private String lastName;
@@ -9,7 +9,7 @@ public class AccountHolder {
     private String passWord;
 
 
-    public AccountHolder(String firstName, String lastName, int age, String email, String password) {
+    public User(String firstName, String lastName, int age, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
