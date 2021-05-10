@@ -2,10 +2,7 @@ package com.bank.util;
 
 import com.bank.daos.AccountDAO;
 import com.bank.daos.UserDAO;
-import com.bank.screens.DepositScreen;
-import com.bank.screens.OpenAccountScreen;
-import com.bank.screens.RegisterAccountScreen;
-import com.bank.screens.WelcomeScreen;
+import com.bank.screens.*;
 import com.bank.services.UserService;
 
 import java.io.BufferedReader;
@@ -26,7 +23,6 @@ public class AppState {
 
         final UserDAO userDAO = new UserDAO ();
         final AccountDAO accountDAO = new AccountDAO ();
-
         final UserService userService = new UserService (userDAO);
         Profile profile = new Profile ();
         router = new ScreenRouter ();
@@ -34,6 +30,7 @@ public class AppState {
         router.addScreen (new RegisterAccountScreen (consoleReader, userService, router, profile));
         router.addScreen(new OpenAccountScreen (consoleReader, router, profile, accountDAO));
         router.addScreen (new DepositScreen (consoleReader, router, profile, accountDAO));
+        router.addScreen (new LoginScreen (consoleReader, router));
 
         System.out.println ("Banking application opened!");
 

@@ -8,6 +8,14 @@ public class User {
     private String email;
     private String passWord;
 
+    public User(){
+        this.firstName = null;
+        this.lastName = null;
+        this.age = 0;
+        this.email = null;
+        this.passWord = null;
+    }
+
 
     public User(String firstName, String lastName, int age, String email, String password) {
         this.firstName = firstName;

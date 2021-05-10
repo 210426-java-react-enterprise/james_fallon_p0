@@ -26,7 +26,7 @@ public class WelcomeScreen extends Screen{
             switch(userSelection){
                 case "1":
                     System.out.println("Taking you to your Account Dash Board");
-                    ///route to login screen
+                    router.navigate ("login");
                     break;
                 case "2":
                     System.out.println ("Taking you to register screen");

@@ -41,7 +41,7 @@ public class DepositScreen extends Screen{
         try {
             deposit = Double.parseDouble (consoleReader.readLine ());
 
-            
+
         }catch (NumberFormatException e){
             System.err.println("You provided incorrect input for your deposit!");
             this.render ();
