@@ -5,6 +5,12 @@ public class Account {
     private String accountType;
     private double accountBalance;
 
+    public Account(){
+        this.accountId = 0;
+        this.accountType = null;
+        this.accountBalance = 0.0;
+    }
+
     public Account(String accountType, double accountBalance) {
         this.accountType = accountType;
         this.accountBalance = accountBalance;
@@ -34,5 +40,12 @@ public class Account {
         this.accountBalance = accountBalance;
     }
 
-
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", accountType='" + accountType + '\'' +
+                ", accountBalance=" + accountBalance +
+                '}';
+    }
 }

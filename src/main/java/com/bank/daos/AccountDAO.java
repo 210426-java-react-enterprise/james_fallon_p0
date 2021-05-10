@@ -37,6 +37,7 @@ public class AccountDAO {
     }
 
     public List<Account> getAllAccountsByUserID(User registeredUser){
+        Account account = null;
         List<Account> accounts = new LinkedList<> ();
         try(Connection conn = ConnectionFactory.getInstance ().getConnection ()){
             String sql = "select * from bank.accounts join accounts_users on accounts.account_id = accounts_users.account_id where user_id = ?";
@@ -44,7 +45,7 @@ public class AccountDAO {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                Account account = new Account();
+                account = new Account();
 
                 account.setAccountId (rs.getInt("account_id"));
                 account.setAccountType (rs.getString("account_type"));
