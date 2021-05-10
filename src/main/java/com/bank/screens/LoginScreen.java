@@ -1,6 +1,6 @@
 package com.bank.screens;
 
-import com.bank.daos.userDAO;
+import com.bank.daos.UserDAO;
 import com.bank.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 public class LoginScreen extends Screen{
     private BufferedReader consoleReader;
     private ScreenRouter router;
-    private userDAO userDAO = new userDAO ();
+    private UserDAO userDAO = new UserDAO ();
 
     public LoginScreen(BufferedReader consoleReader, ScreenRouter router) {
         super ("LoginScreen", "/login");

@@ -22,6 +22,7 @@ public class RegisterAccountScreen extends Screen {
         this.consoleReader = consoleReader;
         this.userService = userService;
         this.router = router;
+        this.profile = profile;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class RegisterAccountScreen extends Screen {
 
             User newUser = new User (firstName, lastName, age, email, password);
             userService.register (newUser);
-            app().setProfile ();
+            profile.setCurrentUser (newUser);
             router.navigate ("/open");
 
 

@@ -1,6 +1,8 @@
 package com.bank.util;
 
-import com.bank.daos.userDAO;
+import com.bank.daos.AccountDAO;
+import com.bank.daos.UserDAO;
+import com.bank.screens.DepositScreen;
 import com.bank.screens.OpenAccountScreen;
 import com.bank.screens.RegisterAccountScreen;
 import com.bank.screens.WelcomeScreen;
@@ -22,12 +24,16 @@ public class AppState {
         appRunning = true;
         consoleReader = new BufferedReader(new InputStreamReader (System.in));
 
-        final userDAO userDAO = new userDAO ();
+        final UserDAO userDAO = new UserDAO ();
+        final AccountDAO accountDAO = new AccountDAO ();
+
         final UserService userService = new UserService (userDAO);
+        Profile profile = new Profile ();
         router = new ScreenRouter ();
         router.addScreen(new WelcomeScreen (consoleReader, router));
         router.addScreen (new RegisterAccountScreen (consoleReader, userService, router, profile));
-        router.addScreen(new OpenAccountScreen (consoleReader, router, profile));
+        router.addScreen(new OpenAccountScreen (consoleReader, router, profile, accountDAO));
+        router.addScreen (new DepositScreen (consoleReader, router, profile, accountDAO));
 
         System.out.println ("Banking application opened!");
 
@@ -37,10 +43,6 @@ public class AppState {
     public ScreenRouter getRouter(){return router;}
 
 
-
-    public void setProfile(){this.profile = profile;}
-
-    public Profile getProfile(){return profile;}
 
     public boolean isAppRunning() {
         return appRunning;

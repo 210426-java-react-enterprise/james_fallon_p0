@@ -1,6 +1,6 @@
 package com.bank.daos;
 
-import com.bank.pojo.Account;
+import com.bank.pojo.User;
 import com.bank.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -8,11 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class accountDAO {
-    public void save(Account newAccount){
+public class UserDAO {
+    public void save(User newUser){
         try(Connection conn = ConnectionFactory.getInstance ().getConnection ()){
-            String sqlInsertUser = "insert into bank.account(type, balance) values(?,?,?)";
-            PreparedStatement pstmt = conn.prepareStatement (sqlInsertUser, new String[]{"account_id"});
+            String sqlInsertUser = "insert into bank.users(first_name, last_name, age, email, password) values(?,?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement (sqlInsertUser, new String[]{"user_id"});
             pstmt.setString(1, newUser.getFirstName ());
             pstmt.setString(2, newUser.getLastName ());
             pstmt.setInt(3, newUser.getAge ());
@@ -23,11 +23,16 @@ public class accountDAO {
             if(rowsInserted != 0){
                 ResultSet rs = pstmt.getGeneratedKeys ();
                 while(rs.next()){
-                    newUser.setId(rs.getInt("account"));
+                    newUser.setId(rs.getInt("user_id"));
                 }
             }
         }catch (SQLException throwables){
             throwables.printStackTrace ();
         }
+
     }
+
+
+
+
 }

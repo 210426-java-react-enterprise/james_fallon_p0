@@ -1,15 +1,15 @@
 package com.bank.services;
 
-import com.bank.daos.userDAO;
+import com.bank.daos.UserDAO;
 import com.bank.exceptions.InvalidRequestException;
 import com.bank.exceptions.ResourcePersistenceException;
 import com.bank.pojo.User;
 
 public class UserService {
 
-    private userDAO userDAO;
+    private UserDAO userDAO;
 
-    public UserService(userDAO userDAO){ this.userDAO = userDAO;}
+    public UserService(UserDAO userDAO){ this.userDAO = userDAO;}
 
     public void register(User newUser) throws InvalidRequestException, ResourcePersistenceException {
 
