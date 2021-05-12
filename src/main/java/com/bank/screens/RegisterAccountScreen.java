@@ -62,6 +62,7 @@ public class RegisterAccountScreen extends Screen {
             this.render ();
         }catch (InvalidRequestException | ResourcePersistenceException e){
             e.printStackTrace ();
+            router.navigate ("/welcome");
         }catch (Exception e){
             e.printStackTrace ();
         }

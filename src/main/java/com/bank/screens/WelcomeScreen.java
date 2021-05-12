@@ -18,27 +18,27 @@ public class WelcomeScreen extends Screen{
     public void render() {
         System.out.println ("THANK YOU FOR CHOOSING JF BANKING!");
         System.out.println ("PRESS (1) TO LOGIN.");
-        System.out.println ("PRESS (2) TO CREATE YOUR ACCOUNT TODAY!!!");
+        System.out.println ("PRESS (2) TO CREATE YOUR FIRST ACCOUNT TODAY!!!");
         System.out.println ("PRESS (3) TO EXIT.");
         System.out.print(">>>>>>> ");
         try{
             String userSelection = consoleReader.readLine();
             switch(userSelection){
                 case "1":
-                    System.out.println("Taking you to your Account Dash Board");
-                    router.navigate ("login");
+                    System.out.println("Taking you to your account dashboard.");
+                    router.navigate ("/login");
                     break;
                 case "2":
-                    System.out.println ("Taking you to register screen");
+                    System.out.println ("Taking you to registration.");
                     router.navigate ("/register");
                     break;
                 case "3":
-                    System.out.println ("Exiting application!");
+                    System.out.println ("Goodbye.");
                     app().setAppRunning(false);
                     break;
                 default:
                     System.out.println ("Invalid Selection");
-
+                    this.render ();
 
             }
         }catch(Exception e){

@@ -30,35 +30,47 @@ public class Dashboard extends Screen{
         List<Account> currentUsersAccounts = accountDAO.getAllAccountsByUserID (profile.getCurrentUser ());
 
         System.out.println ("Welcome to your account DashBoard " + profile.getCurrentUser () + "!");
-        System.out.println ("Your User ID: " + profile.getCurrentUser ());
-        System.out.println ("Your Accounts: " );
+        System.out.println ("Your User ID: " + profile.getCurrentUser().getId ());
+        System.out.println ("Your Account(s): " );
 
         for(int i = 0; i<currentUsersAccounts.size (); i++){
-            currentUsersAccounts.get (i);
-            System.out.println (i);
+            Account account = currentUsersAccounts.get (i);
             System.out.println ("-----------------------");
+            System.out.println (account);
+
         }
 
-        System.out.println ("Open Account>1");
-        System.out.println ("Deposit>2");
-        System.out.println ("Withdraw>3");
-        System.out.println ("View Transactions>4");
-        System.out.println ("Exit Application>5");
+        System.out.println ("Make or View Transaction>1");
+        System.out.println ("Open New Account>2");
+        System.out.println ("Exit Application>3");
 
         try{
             String userSelection = consoleReader.readLine();
             switch(userSelection){
                 case "1":
-                    System.out.println("Taking you to the New Account portal!");
-                    router.navigate ("/open");
+                    System.out.println("Which account would you like to make a transaction on?");
+                    for(int i = 0; i<currentUsersAccounts.size (); i++){
+                        Account account = currentUsersAccounts.get (i);
+                        System.out.println ("Press>>>" + i + " for account: " + account);
+                        System.out.println ("-----------------------");
+                        try{
+                            int selection = Integer.parseInt (consoleReader.readLine ());
+                            currentUsersAccounts.get(selection);
+                            profile.setCurrentAccount (currentUsersAccounts.get (selection));
+                            router.navigate ("/dashboard");
+
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    }
                     break;
                 case "2":
-                    System.out.println ("Taking you to Deposit Portal!");
-                    router.navigate ("/deposit");
+                    System.out.println ("Taking you to open a new account!");
+                    router.navigate ("/open");
                     break;
                 case "3":
-                    System.out.println ("Taking you to Withdraw Portal!");
-                    router.navigate("/withdraw");
+                    System.out.println ("Good Bye");
+
                     break;
                 case "4":
                     System.out.println ("Taking you to Transactions Portal!");

@@ -1,30 +1,41 @@
 package com.bank.util;
 
-public class LinkedListTest {
+import org.junit.*;
 
+public class LinkedListTest {
     private LinkedList<String> sut;
 
-    public void test_add_withNull(){
+    @Before
+    public void setUpTest(){
+        sut = new LinkedList<> ();
+    }
+
+    @After
+    public void tearDownTest(){
+        sut = null;
+    }
+
+    @Test
+    public void test_addWithNonNullValue(){
         //Arrange
-
-        sut = new LinkedList<> ();
-
+        int expectedSize = 1;
         //Act
-        try {
-            sut.add (null);
-            System.out.println ("Test add with null did not pass");
-        }catch (IllegalArgumentException e){
-            System.out.println ("Test Passed");
-        }
+        sut.add("data");
+
         //Assert
+        int actualSize = sut.size();
+        Assert.assertEquals (expectedSize, actualSize);
     }
 
-    public void test_add_withNonNullValues{
+    @Test(expected = IllegalArgumentException.class)
+    public void test_addWithNullValue(){
+        //Nothing to arrange
 
-        sut = new LinkedList<> ();
+        sut.add(null);
 
-        sut.add("not null");
+        //JUnit asserts exception
     }
+
 
 
 }

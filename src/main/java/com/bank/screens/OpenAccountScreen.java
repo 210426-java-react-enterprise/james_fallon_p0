@@ -49,7 +49,6 @@ public class OpenAccountScreen extends Screen{
                     break;
                 case "2":
                     System.out.println ("Opening Your Savings Account");
-                    router.navigate ("/register");
                     accountType = "Savings";
                     break;
                 default:
@@ -60,7 +59,7 @@ public class OpenAccountScreen extends Screen{
             Account newAccount = new Account (accountType, 0.00);
             accountDAO.save (newAccount, currentUser);
             profile.setCurrentAccount (newAccount);
-            router.navigate ("/deposit");
+            router.navigate ("/transaction");
         }catch(Exception e){
             e.printStackTrace();
         }

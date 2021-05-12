@@ -28,9 +28,10 @@ public class AccountDAO {
             }
 
             String sqlInsertAccountUser = "insert into bank.accounts_users(account_id, user_id) values(?, ?)";
-            PreparedStatement pstmt2 = conn.prepareStatement (sqlInsertAccount);
+            PreparedStatement pstmt2 = conn.prepareStatement (sqlInsertAccountUser);
             pstmt2.setInt (1, newAccount.getAccountId ());
             pstmt2.setInt(2, registeredUser.getId ());
+            pstmt2.executeUpdate ();
         }catch (SQLException throwables){
             throwables.printStackTrace ();
         }
@@ -40,7 +41,7 @@ public class AccountDAO {
         Account account = null;
         List<Account> accounts = new LinkedList<> ();
         try(Connection conn = ConnectionFactory.getInstance ().getConnection ()){
-            String sql = "select * from bank.accounts join accounts_users on accounts.account_id = accounts_users.account_id where user_id = ?";
+            String sql = "select * from bank.accounts join bank.accounts_users on accounts.account_id = accounts_users.account_id where user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
@@ -50,8 +51,6 @@ public class AccountDAO {
                 account.setAccountId (rs.getInt("account_id"));
                 account.setAccountType (rs.getString("account_type"));
                 account.setAccountBalance(rs.getDouble("balance"));
-
-
 
                 accounts.add(account);
             }
@@ -63,4 +62,20 @@ public class AccountDAO {
         }
         return accounts;
     }
+
+    public void updateBalance(Account account){
+        try(Connection conn = ConnectionFactory.getInstance ().getConnection()){
+            String sql= "update bank.accounts set balance = ? where account_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement (sql);
+            pstmt.setDouble(1, account.getAccountBalance());
+            pstmt.setInt (2, account.getAccountId());
+            pstmt.executeUpdate ();
+
+        }catch (SQLException throwables){
+            throwables.printStackTrace ();
+        }
+    }
+
+
+
 }
