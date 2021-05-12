@@ -29,7 +29,7 @@ public class Dashboard extends Screen{
     public void render() {
         List<Account> currentUsersAccounts = accountDAO.getAllAccountsByUserID (profile.getCurrentUser ());
 
-        System.out.println ("Welcome to your account DashBoard " + profile.getCurrentUser () + "!");
+        System.out.println ("Welcome to your account DashBoard " + profile.getCurrentUser ().getFirstName () + "!");
         System.out.println ("Your User ID: " + profile.getCurrentUser().getId ());
         System.out.println ("Your Account(s): " );
 
@@ -49,20 +49,21 @@ public class Dashboard extends Screen{
             switch(userSelection){
                 case "1":
                     System.out.println("Which account would you like to make a transaction on?");
-                    for(int i = 0; i<currentUsersAccounts.size (); i++){
+                    for(int i = 0; i<currentUsersAccounts.size (); i++) {
                         Account account = currentUsersAccounts.get (i);
-                        System.out.println ("Press>>>" + i + " for account: " + account);
+                        System.out.println ("Press (" + i + ") for account: " + account);
                         System.out.println ("-----------------------");
+                    }
                         try{
                             int selection = Integer.parseInt (consoleReader.readLine ());
                             currentUsersAccounts.get(selection);
                             profile.setCurrentAccount (currentUsersAccounts.get (selection));
-                            router.navigate ("/dashboard");
+                            router.navigate ("/transaction");
 
                         }catch(Exception e){
                             e.printStackTrace();
                         }
-                    }
+
                     break;
                 case "2":
                     System.out.println ("Taking you to open a new account!");

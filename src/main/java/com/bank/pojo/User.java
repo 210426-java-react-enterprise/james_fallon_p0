@@ -6,14 +6,10 @@ public class User {
     private String lastName;
     private int age;
     private String email;
-    private String passWord;
+    private String password;
 
     public User(){
-        this.firstName = null;
-        this.lastName = null;
-        this.age = 0;
-        this.email = null;
-        this.passWord = null;
+        super();
     }
 
 
@@ -22,7 +18,12 @@ public class User {
         this.lastName = lastName;
         this.age = age;
         this.email = email;
-        this.passWord = password;
+        this.password = password;
+    }
+
+    public User(int id, String firstName, String lastName, int age, String email, String password){
+        this(firstName, lastName, age, email, password);
+        this.id = id;
     }
 
     public int getId() {
@@ -67,10 +68,10 @@ public class User {
     }
 
     public String getPassword() {
-        return passWord;
+        return password;
     }
 
-    public void setPassword(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -13,7 +13,8 @@ public class UserService {
 
     public void register(User newUser) throws InvalidRequestException, ResourcePersistenceException {
 
-       if(!isUserValid (newUser)){
+
+        if(!isUserValid (newUser)){
            throw new InvalidRequestException ("Invalid user data");
        }
        if(!isUserOfAge (newUser)){
@@ -27,7 +28,7 @@ public class UserService {
         if(user == null) return false;
         if(user.getFirstName() == null || user.getFirstName().trim().isEmpty()) return false;
         if(user.getLastName() == null || user.getLastName().trim().isEmpty()) return false;
-        if(user.getEmail () == null || user.getEmail ().trim().isEmpty()) return false;
+        if(user.getEmail () == null || user.getEmail ().trim().isEmpty()||!user.getEmail ().contains ("@")) return false;
         if(user.getAge () <=0) return false;
         return true;
     }

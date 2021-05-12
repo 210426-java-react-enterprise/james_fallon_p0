@@ -30,7 +30,7 @@ public class LoginScreen extends Screen{
 
         try {
             System.out.print ("Email>>");
-            email = consoleReader.readLine ();
+            email = consoleReader.readLine().toLowerCase ();
             System.out.print("Password>>");
             password = consoleReader.readLine ();
 

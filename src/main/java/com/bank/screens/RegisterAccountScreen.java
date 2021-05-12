@@ -8,6 +8,7 @@ import com.bank.util.Profile;
 import com.bank.util.ScreenRouter;
 
 import java.io.BufferedReader;
+import java.util.Locale;
 
 import static com.bank.Driver.app;
 
@@ -44,7 +45,7 @@ public class RegisterAccountScreen extends Screen {
             System.out.print("Last Name:>>");
             lastName = consoleReader.readLine ();
             System.out.print("Email:>>");
-            email = consoleReader.readLine ();
+            email = consoleReader.readLine ().toLowerCase ();
             System.out.print("Age:>>");
             age = Integer.parseInt (consoleReader.readLine ());
             System.out.print("Create Password:>>");
@@ -61,7 +62,7 @@ public class RegisterAccountScreen extends Screen {
             System.err.println("You provided incorrect input for your age!");
             this.render ();
         }catch (InvalidRequestException | ResourcePersistenceException e){
-            e.printStackTrace ();
+            System.err.println(e.getMessage ());
             router.navigate ("/welcome");
         }catch (Exception e){
             e.printStackTrace ();

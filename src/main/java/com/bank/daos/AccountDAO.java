@@ -43,6 +43,7 @@ public class AccountDAO {
         try(Connection conn = ConnectionFactory.getInstance ().getConnection ()){
             String sql = "select * from bank.accounts join bank.accounts_users on accounts.account_id = accounts_users.account_id where user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, registeredUser.getId ());
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {

@@ -97,13 +97,14 @@ public class TransactionsScreen extends Screen {
             router.navigate ("/dashboard");
 
         }catch (InvalidRequestException e){
-            e.printStackTrace ();
+            System.err.println (e.getMessage ());
             this.render();
         }catch (NumberFormatException e) {
             System.err.println("Incorrect input");
             this.render();
         }catch (IOException e) {
-            e.printStackTrace ();
+            System.err.println ("Something went wrong");
+            router.navigate ("/welcome");
         }
 
 
