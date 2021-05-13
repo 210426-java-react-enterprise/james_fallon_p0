@@ -1,8 +1,6 @@
 package com.bank;
 
 import com.bank.util.AppState;
-import com.bank.util.LinkedList;
-import com.bank.util.List;
 
 public class Driver {
 

@@ -1,5 +1,6 @@
 package com.bank.util;
 import com.bank.screens.Screen;
+
 public class ScreenRouter {
 
     private LinkedList<Screen> screens= new LinkedList<>();

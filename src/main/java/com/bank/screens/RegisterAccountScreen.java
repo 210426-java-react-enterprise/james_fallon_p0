@@ -65,7 +65,8 @@ public class RegisterAccountScreen extends Screen {
             System.err.println(e.getMessage ());
             router.navigate ("/welcome");
         }catch (Exception e){
-            e.printStackTrace ();
+            System.err.println ("Something went wrong!");
+            router.navigate ("/welcome");
         }
     }
 }

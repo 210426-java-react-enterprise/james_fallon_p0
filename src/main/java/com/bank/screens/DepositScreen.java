@@ -9,14 +9,14 @@ import com.bank.util.ScreenRouter;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class WithdrawScreen extends Screen {
+public class DepositScreen extends Screen {
     BufferedReader consoleReader;
     ScreenRouter router;
     Profile profile;
     TransactionService transactionService;
 
-    public WithdrawScreen(BufferedReader consoleReader, ScreenRouter router, Profile profile, TransactionService transactionService) {
-        super ("WithdrawScreen", "/withdraw");
+    public DepositScreen(BufferedReader consoleReader, ScreenRouter router, Profile profile, TransactionService transactionService) {
+        super ("DepositScreen", "/deposit");
         this.consoleReader = consoleReader;
         this.router = router;
         this.profile = profile;
@@ -26,23 +26,27 @@ public class WithdrawScreen extends Screen {
     @Override
     public void render() {
         Account currentAccount = profile.getCurrentAccount ();
-        System.out.print("How much would you like to Withdrawal: " + currentAccount + "\n$ ");
+        System.out.print ("How much money would you like to deposit into this account:  " + currentAccount + "\n$ ");
+
         try {
-            double withdrawal = Double.parseDouble (consoleReader.readLine ());
-            transactionService.withdraw (withdrawal);
+            double deposit = Double.parseDouble (consoleReader.readLine ());
+            transactionService.deposit (deposit);
             System.out.println ("Transaction Successful ");
             System.out.println (currentAccount);
             router.navigate ("/dashboard");
 
-        }catch (InvalidRequestException e){
+        } catch (InvalidRequestException e) {
             System.err.println (e.getMessage ());
-            router.navigate ("/dashboard");
-        }catch (NumberFormatException e) {
-            System.err.println("Incorrect input");
-            this.render();
-        }catch (IOException e) {
+            this.render ();
+        } catch (NumberFormatException e) {
+            System.err.println ("Incorrect input");
+            this.render ();
+        } catch (IOException e) {
             System.err.println ("Something went wrong");
             router.navigate ("/welcome");
         }
+
+
     }
+
 }

@@ -8,7 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The User Data Access Object Class uses Java Database Connectivity to perform DQL and DML commands on the Bank Database's User Table.
+ */
+
 public class UserDAO {
+
+    /**
+     * Inserts a row into User Table after a user has been registered.
+     */
     public void save(User newUser){
         try(Connection conn = ConnectionFactory.getInstance ().getConnection ()){
             String sqlInsertUser = "insert into bank.users(first_name, last_name, age, email, password) values(?,?,?,?,?)";
@@ -32,6 +40,12 @@ public class UserDAO {
 
     }
 
+    /**
+     * Returns a User object that holds the provide values for email and password fields.
+     * @param email
+     * @param password
+     * @return
+     */
     public User findUserByEmailAndPassword(String email, String password){
         User user = null;
 
@@ -59,6 +73,28 @@ public class UserDAO {
 
         return user;
 
+
+    }
+
+    /**
+     * Returns a boolean to determine if the provided value for the email field is present in the Database.
+     * @param email
+     * @return
+     */
+    public boolean isEmailAvailable(String email){
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+            String sql = "select * from bank.users where email = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString (1, email);
+
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next ()){
+                return false;
+            }
+        }catch(SQLException e){
+            e.printStackTrace ();
+        }
+        return true;
 
     }
 

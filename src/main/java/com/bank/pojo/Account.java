@@ -1,5 +1,7 @@
 package com.bank.pojo;
 
+import java.text.DecimalFormat;
+
 public class Account {
     private int accountId;
     private String accountType;
@@ -14,6 +16,11 @@ public class Account {
     public Account(String accountType, double accountBalance) {
         this.accountType = accountType;
         this.accountBalance = accountBalance;
+    }
+
+    public Account(int accountId, String accountType, double accountBalance){
+        this(accountType, accountBalance);
+        this.accountId = accountId;
     }
 
     public int getAccountId() {
@@ -42,10 +49,11 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
+        DecimalFormat ft = new DecimalFormat ("$###,###,###,###.00");
+        return "Account ((((" +
                 "accountId=" + accountId +
                 ", accountType='" + accountType + '\'' +
-                ", accountBalance=" + accountBalance +
-                '}';
+                ", accountBalance=" + ft.format (accountBalance) +
+                ")))))";
     }
 }

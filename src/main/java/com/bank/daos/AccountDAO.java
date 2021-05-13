@@ -11,7 +11,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The Account Data Access Object Class uses Java Database Connectivity to perform DQL and DML commands on the Bank Database's Accounts Table.
+ */
+
 public class AccountDAO {
+
+    /**
+     * Inserts Account Credentials into Accounts Table and creates dependency between account and user.
+     */
     public void save(Account newAccount, User registeredUser){
         try(Connection conn = ConnectionFactory.getInstance ().getConnection()){
             String sqlInsertAccount = "insert into bank.accounts(account_type, balance) values(?, ?)";
@@ -36,6 +44,12 @@ public class AccountDAO {
             throwables.printStackTrace ();
         }
     }
+
+    /**
+     * Returns a list of Accounts that hold a reference to the injected User Object's ID.
+     * @param registeredUser
+     * @return
+     */
 
     public List<Account> getAllAccountsByUserID(User registeredUser){
         Account account = null;
@@ -64,6 +78,10 @@ public class AccountDAO {
         return accounts;
     }
 
+    /**
+     * Updates the balance in Accounts Table upon a Account transaction.
+     * @param account
+     */
     public void updateBalance(Account account){
         try(Connection conn = ConnectionFactory.getInstance ().getConnection()){
             String sql= "update bank.accounts set balance = ? where account_id = ?";

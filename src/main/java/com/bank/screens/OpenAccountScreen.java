@@ -8,9 +8,9 @@ import com.bank.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
-import static com.bank.Driver.app;
 
-public class OpenAccountScreen extends Screen{
+
+public class OpenAccountScreen extends Screen {
 
     private BufferedReader consoleReader;
     private ScreenRouter router;
@@ -25,43 +25,51 @@ public class OpenAccountScreen extends Screen{
         this.accountDAO = accountDAO;
 
 
-
     }
 
     @Override
     public void render() {
-        String accountType = null;
+        String accountType;
         Double accountBalance;
 
         User currentUser = profile.getCurrentUser ();
 
-        System.out.println ("Hello " + currentUser.getFirstName() + ". What kind of account would you like to Open?");
+        System.out.println ("Hello " + currentUser.getFirstName () + ". What kind of account would you like to Open?");
         System.out.println ("Checking>>1");
         System.out.println ("Savings>>2");
+        System.out.println ("Go Back To Dashboard>>3");
 
-        try{
-
-            String userSelection = consoleReader.readLine();
-            switch(userSelection){
+        try {
+            Account newAccount = new Account ();
+            String userSelection = consoleReader.readLine ();
+            switch (userSelection) {
                 case "1":
-                    System.out.println("Opening Your Checking Account");
-                    accountType = "Checking";
+                    System.out.println ("Opening Your Checking Account");
+                    newAccount.setAccountType ("Checking");
+                    accountDAO.save (newAccount, currentUser);
+                    profile.setCurrentAccount (newAccount);
+                    router.navigate ("/deposit");
                     break;
                 case "2":
                     System.out.println ("Opening Your Savings Account");
-                    accountType = "Savings";
+                    newAccount.setAccountType ("Savings");
+                    accountDAO.save (newAccount, currentUser);
+                    profile.setCurrentAccount (newAccount);
+                    router.navigate ("/deposit");
+                    break;
+                case "3":
+                    System.out.println ("Going To Dashboard");
+                    profile.setCurrentAccount (newAccount);
+                    router.navigate ("/dashboard");
                     break;
                 default:
-                    System.out.println ("Invalid selection");
+                    System.err.println ("Invalid selection");
+                    this.render ();
 
             }
 
-            Account newAccount = new Account (accountType, 0.00);
-            accountDAO.save (newAccount, currentUser);
-            profile.setCurrentAccount (newAccount);
-            router.navigate ("/transaction");
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.getMessage ();
         }
 
     }

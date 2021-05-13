@@ -43,7 +43,7 @@ public class LoginScreen extends Screen{
 
                 } else {
                     System.out.println("Credential not recognized. Please try again.");
-                    this.render ();
+                    router.navigate ("/welcome");
                 }
 
             }

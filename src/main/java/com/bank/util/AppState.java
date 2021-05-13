@@ -24,15 +24,21 @@ public class AppState {
 
         final UserDAO userDAO = new UserDAO ();
         final AccountDAO accountDAO = new AccountDAO ();
-        final UserService userService = new UserService (userDAO);
-        final TransactionService transactionService = new TransactionService (accountDAO);
         Profile profile = new Profile ();
+
+        final UserService userService = new UserService (userDAO);
+        final TransactionService transactionService = new TransactionService (accountDAO, profile);
+
+
         router = new ScreenRouter ();
         router.addScreen(new WelcomeScreen (consoleReader, router));
         router.addScreen (new RegisterAccountScreen (consoleReader, userService, router, profile));
         router.addScreen(new OpenAccountScreen (consoleReader, router, profile, accountDAO));
-        router.addScreen (new TransactionsScreen (consoleReader, router, profile, transactionService));
+        router.addScreen (new DepositScreen (consoleReader, router, profile, transactionService));
+        router.addScreen (new WithdrawScreen (consoleReader, router, profile,transactionService));
         router.addScreen (new Dashboard (consoleReader, router, profile, accountDAO));
+        router.addScreen (new TransactionsScreen (consoleReader, router, profile, accountDAO));
+        router.addScreen (new TransactionTypeScreen (consoleReader, router));
         router.addScreen (new LoginScreen (consoleReader, router, profile));
 
         System.out.println ("Banking application opened!");

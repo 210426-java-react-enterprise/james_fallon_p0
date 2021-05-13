@@ -1,9 +1,7 @@
 package com.bank.util;
 
 
-
-
-public class LinkedList<T> implements List<T>, Queue<T>{
+public class LinkedList<T> implements List<T>, Queue<T> {
     private int size;
     private Node<T> head;
     private Node<T> tail;
